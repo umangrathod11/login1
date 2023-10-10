@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form-03</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-box">
+        <h1>Login Form</h1>
+        <form id="loginForm">
+            <div class="user-box">
+                <input type="text" id="usernameInput">
+                <label>Username</label>
+            </div>
+            <div class="user-box">
+                <input type="password" id="passwordInput">
+                <label>Password</label>
+            </div>
+            <center>
+                <a href="#" onclick="storeData()">
+                    Sign in
+                    <span></span>
+                </a>
+            </center>
+        </form>
+    </div>
+
+    <div class="data-table">
+        <h2>Data Stored in Local Storage</h2>
+        <table border="1">
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+            </tr>
+            <tr>
+                <td id="storedUsername"></td>
+                <td id="storedPassword"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function storeData() {
+            // Get the values entered in the username and password fields
+            const username = document.getElementById("usernameInput").value;
+            const password = document.getElementById("passwordInput").value;
+
+            // Store the data in local storage
+            localStorage.setItem("username", username);
+            localStorage.setItem("password", password);
+
+            // Update the table with the stored data
+            document.getElementById("storedUsername").textContent = username;
+            document.getElementById("storedPassword").textContent = password;
+
+            // Optionally, you can also check if the data was stored successfully and provide feedback to the user
+            if (localStorage.getItem("username") && localStorage.getItem("password")) {
+                alert("Data stored successfully!");
+            } else {
+                alert("Failed to store data.");
+            }
+        }
+
+        // Retrieve and display data on page load
+        const storedUsername = localStorage.getItem("username");
+        const storedPassword = localStorage.getItem("password");
+        if (storedUsername && storedPassword) {
+            document.getElementById("storedUsername").textContent = storedUsername;
+            document.getElementById("storedPassword").textContent = storedPassword;
+        }
+    </script>
+</body>
+</html>
